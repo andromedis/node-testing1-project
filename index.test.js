@@ -30,17 +30,45 @@ describe('[Exercise 2] trimPropertiesMutation', () => {
 })
 
 describe('[Exercise 3] findLargestInteger', () => {
-  test.todo('[5] returns the largest number in an array of objects { integer: 2 }')
+  test('[5] returns the largest number in an array of objects { integer: 2 }', () => {
+    let array = [{ integer: 2 }, { integer: 8 }, { integer: 1 }, { integer: 5 }, { integer: 3 }]
+    let output = utils.findLargestInteger(array)
+    expect(output).toBe(8)
+
+    array = [{ integer: -3 }, { integer: -5 }, { integer: 0 }]
+    output = utils.findLargestInteger(array)
+    expect(output).toBe(0)
+    
+    array = [{ integer: -2 }, { integer: 3 }, { integer: -9 }, { integer: 12 }]
+    output = utils.findLargestInteger(array)
+    expect(output).toBe(12)
+  })
 })
 
 describe('[Exercise 4] Counter', () => {
   let counter
+  const initialNumber = 3
   beforeEach(() => {
-    counter = new utils.Counter(3) // each test must start with a fresh couter
+    counter = new utils.Counter(initialNumber) // each test must start with a fresh couter
   })
-  test.todo('[6] the FIRST CALL of counter.countDown returns the initial count')
-  test.todo('[7] the SECOND CALL of counter.countDown returns the initial count minus one')
-  test.todo('[8] the count eventually reaches zero but does not go below zero')
+  test('[6] the FIRST CALL of counter.countDown returns the initial count', () => {
+    const count = counter.countDown() // 3
+    expect(count).toEqual(initialNumber)
+  })
+  test('[7] the SECOND CALL of counter.countDown returns the initial count minus one', () => {
+    counter.countDown() // 3
+    const count = counter.countDown() // 2
+    expect(count).toEqual(initialNumber - 1) // 3 - 1 = 2
+  })
+  test('[8] the count eventually reaches zero but does not go below zero', () => {
+    for (let i = 0; i < initialNumber; i++) {
+      counter.countDown()
+    }
+    let count = counter.countDown() // 0
+    expect(count).toEqual(0)
+    count = counter.countDown() // 0
+    expect(count).toEqual(0)
+  })
 })
 
 describe('[Exercise 5] Seasons', () => {
