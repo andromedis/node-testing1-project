@@ -78,6 +78,7 @@ class Seasons {
    */
   constructor() {
     // ✨ initialize whatever properties are needed
+    this.season = ''
   }
 
   /**
@@ -94,6 +95,18 @@ class Seasons {
    */
   next() {
     // ✨ implement
+    switch (this.season) {
+      case 'summer': 
+        this.season = 'fall';   break;
+      case 'fall':    
+        this.season = 'winter'; break;
+      case 'winter':  
+        this.season = 'spring'; break;
+      case 'spring':
+      default:
+        this.season = 'summer'; break;
+    }
+    return this.season
   }
 }
 
@@ -108,6 +121,9 @@ class Car {
     this.odometer = 0 // car initilizes with zero miles
     this.tank = tankSize // car initiazes full of gas
     // ✨ initialize whatever other properties are needed
+    this.name = name
+    this.mpg = mpg
+    this.tankSize = tankSize
   }
 
   /**
@@ -125,6 +141,17 @@ class Car {
    */
   drive(distance) {
     // ✨ implement
+    if ((distance / this.mpg) <= this.tank) {
+      this.tank -= (distance / this.mpg)
+      this.odometer += distance
+      return this.odometer
+    }
+    else {
+      distance = this.tank * this.mpg
+      this.tank = 0
+      this.odometer += distance
+      return this.odometer
+    }
   }
 
   /**
@@ -140,6 +167,13 @@ class Car {
    */
   refuel(gallons) {
     // ✨ implement
+    if (gallons >= this.tankSize - this.tank) {
+      this.tank = this.tankSize
+    }
+    else {
+      this.tank += gallons
+    }
+    return this.mpg * this.tank
   }
 }
 
@@ -164,6 +198,12 @@ class Car {
  */
 function isEvenNumberAsync(number) {
   // ✨ implement
+  if (isNaN(number) || typeof number !== 'number') {
+    return Promise.reject({ message: 'number must be a number' })
+  }
+  else {
+    return Promise.resolve(number % 2 === 0)
+  }
 }
 
 module.exports = {
